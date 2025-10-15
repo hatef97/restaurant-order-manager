@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Docker: Up",
+        "type": "shell",
+        "command": "docker compose up --build",
+        "problemMatcher": []
+      },
+      {
+        "label": "Docker: Down",
+        "type": "shell",
+        "command": "docker compose down",
+        "problemMatcher": []
+      },
+      {
+        "label": "Django: Startproject",
+        "type": "shell",
+        "command": "docker compose run --no-deps web django-admin startproject config .",
+        "problemMatcher": []
+      },
+      {
+        "label": "Django: Migrate",
+        "type": "shell",
+        "command": "docker compose exec web python manage.py migrate",
+        "problemMatcher": []
+      }
+    ]
+  }
+  
