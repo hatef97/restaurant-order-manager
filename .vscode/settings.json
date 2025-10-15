@@ -1,0 +1,7 @@
+{
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "editor.formatOnSave": true
+  }
+  
