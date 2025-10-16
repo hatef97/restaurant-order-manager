@@ -15,13 +15,15 @@ services:
   db:
     image: postgres:16
     environment:
-      POSTGRES_DB: rom
-      POSTGRES_USER: rom
-      POSTGRES_PASSWORD: rom
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: restaurant_order_manager
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d restaurant_order_manager"]
+      interval: 5s
+      retries: 10
 
   redis:
     image: redis:7
