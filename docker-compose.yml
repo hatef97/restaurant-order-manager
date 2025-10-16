@@ -31,4 +31,4 @@ services:
       - "6379:6379"
 
 volumes:
-  pgdata:
+  postgres_data:
