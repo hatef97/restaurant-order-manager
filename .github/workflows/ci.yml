@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+      - name: Ruff (lint)
+        run: ruff check .
+      - name: Black (format check)
+        run: black --check .
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: rom
+          POSTGRES_USER: rom
+          POSTGRES_PASSWORD: rom
+        ports: [ "5432:5432" ]
+        options: >-
+          --health-cmd="pg_isready -U rom -d rom"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+      redis:
+        image: redis:7
+        ports: [ "6379:6379" ]
+        options: >-
+          --health-cmd="redis-cli ping || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    env:
+      DJANGO_DEBUG: "0"
+      DJANGO_SECRET_KEY: ci-secret
+      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1"
+      DB_NAME: rom
+      DB_USER: rom
+      DB_PASSWORD: rom
+      DB_HOST: localhost
+      DB_PORT: "5432"
+      REDIS_URL: redis://localhost:6379/0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+      - name: Django check & migrate
+        run: |
+          python manage.py check
+          python manage.py migrate --noinput
+      - name: Run tests
+        run: pytest
