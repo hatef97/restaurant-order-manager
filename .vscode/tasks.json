@@ -24,6 +24,18 @@
         "type": "shell",
         "command": "docker compose exec web python manage.py migrate",
         "problemMatcher": []
+      },
+      {
+        "label": "QA: Ruff check",
+        "type": "shell",
+        "command": "docker compose exec web ruff check .",
+        "problemMatcher": []
+      },
+      {
+        "label": "QA: Black check",
+        "type": "shell",
+        "command": "docker compose exec web black --check .",
+        "problemMatcher": []
       }
     ]
   }
