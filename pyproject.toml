@@ -1,0 +1,18 @@
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+exclude = ["migrations", ".venv", "venv", "build", "dist"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["migrations", ".venv", "venv", "build", "dist"]
+lint.select = ["E","F","W","I","UP","B","C4","SIM","PL","RUF"]
+lint.ignore = ["E501"]      # handled by Black
+lint.fixable = ["ALL"]
+lint.unfixable = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["config", "catalog", "orders", "payments", "fulfillment", "tables", "customers", "reporting", "simulator", "realtime", "staff", "common"]
+force-single-line = false
+combine-as-imports = true
