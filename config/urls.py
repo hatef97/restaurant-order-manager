@@ -7,16 +7,23 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
-
-def health(_): return JsonResponse({"status": "ok"})
-
+def health(_):
+    return JsonResponse({"status": "ok"})
 
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def me(request):
     u = request.user
-    return JsonResponse({"id": u.id, "email": u.email, "first_name": u.first_name, "last_name": u.last_name})
+    return JsonResponse(
+        {
+            "id": u.id,
+            "email": u.email,
+            "first_name": u.first_name,
+            "last_name": u.last_name,
+        }
+    )
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),

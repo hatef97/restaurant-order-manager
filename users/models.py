@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
 
-
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -28,12 +27,11 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra)
 
 
-
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=150, blank=True)
-    last_name  = models.CharField(max_length=150, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

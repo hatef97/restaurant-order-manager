@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "channels",
     # Local apps
-    'users',
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -67,7 +67,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {"default": env.db("DATABASE_URL", default="sqlite:///" + str(BASE_DIR / "db.sqlite3"))}
+DATABASES = {
+    "default": env.db(
+        "DATABASE_URL", default="sqlite:///" + str(BASE_DIR / "db.sqlite3")
+    )
+}
 
 
 # Password validation
