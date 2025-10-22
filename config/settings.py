@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     # Third-party apps
     "rest_framework",
     "channels",
+    # Local apps
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -110,11 +112,15 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
+AUTH_USER_MODEL = "users.User"
+
+
 REST_FRAMEWORK = {
     # Auth (dev-friendly)
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     # Permissions (read-only for anonymous by default)
     "DEFAULT_PERMISSION_CLASSES": [
