@@ -1,5 +1,7 @@
 Django==5.0.7
 djangorestframework==3.15.2
+djangorestframework_simplejwt==5.5.1
+djoser==2.3.3
 
 # ASGI / Realtime
 channels>=4,<5
