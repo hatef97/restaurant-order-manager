@@ -11,6 +11,4 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         for r in ROLES:
             Group.objects.get_or_create(name=r)
-        self.stdout.write(
-            self.style.SUCCESS("Roles created/ensured: " + ", ".join(ROLES))
-        )
+        self.stdout.write(self.style.SUCCESS("Roles created/ensured: " + ", ".join(ROLES)))
