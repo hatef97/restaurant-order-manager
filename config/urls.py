@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.http import JsonResponse
 
 from rest_framework.decorators import api_view, permission_classes
@@ -30,5 +30,6 @@ urlpatterns = [
     path("health/", health),
     path("api/auth/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/auth/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/catalog/", include("catalog.urls")),
     path("api/me/", me),
 ]
