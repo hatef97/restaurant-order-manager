@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "channels",
     # Local apps
     "users",
+    "catalog",
 ]
 
 MIDDLEWARE = [
